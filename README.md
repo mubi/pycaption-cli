@@ -1,7 +1,7 @@
 pycaption-cli
 =============
 
-A command line interface for the pycaption module.
+A command line interface for the pycaption module. Forked to add WebVTT support, courtesy of [this Brightcove guide](docs.brightcove.com/en/perform/brightcove-player/guides/webvtt-converter.html).
 
 Setup
 =====
@@ -13,7 +13,7 @@ Usage
 
 From your command line:
 
-    pycaption <path to caption file> [--sami --dfxp --srt --transcript]
+    pycaption <path to caption file> [--sami --dfxp --srt --transcript --webvtt]
     
 e.g.
 
@@ -21,7 +21,7 @@ e.g.
 
 Output is written to the screen. To write to a file, use something like this:
 
-    pycaption ../jnorton-caption.scc --dfxp > jnorton.xml
+    pycaption ../jnorton-caption.xml --webvtt > jnorton.vtt
 
 Supported Formats
 =================

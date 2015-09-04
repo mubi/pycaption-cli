@@ -21,6 +21,11 @@ def main():
             dest='srt',
             help="write captions in SRT format",
             default=False,)
+    parser.add_option("--webvtt",
+            action='store_true',
+            dest='webvtt',
+            help="write captions in webvtt format",
+            default=False,)
     parser.add_option("--transcript",
             action='store_true',
             dest='transcript',
@@ -41,7 +46,7 @@ def main():
     except:
         raise Exception(
         ('Expected usage: python caption_converter.py <path to caption file> ',
-        '[--sami --dfxp --srt --transcript]'))
+        '[--sami --dfxp --srt --webvtt --transcript]'))
 
     try:
         captions = codecs.open(filename, encoding='utf-8', mode='r').read()
@@ -58,6 +63,7 @@ def read_captions(captions, options):
     srt_reader = pycaption.SRTReader()
     sami_reader = pycaption.SAMIReader()
     dfxp_reader = pycaption.DFXPReader()
+    webvtt_reader = pycaption.WebVTTReader()
 
     if scc_reader.detect(captions):
         if options.lang:
@@ -71,6 +77,8 @@ def read_captions(captions, options):
         return sami_reader.read(captions)
     elif dfxp_reader.detect(captions):
         return dfxp_reader.read(captions)
+    elif webvtt_reader.detect(captions):
+        return webvtt_reader.read(captions)
     else:
         raise Exception('No caption format detected :(')
 
@@ -80,6 +88,8 @@ def write_captions(content, options):
         print pycaption.SAMIWriter().write(content).encode("utf-8")
     if options.dfxp:
         print pycaption.DFXPWriter().write(content).encode("utf-8")
+    if options.webvtt:
+        print pycaption.WebVTTWriter().write(content).encode("utf-8")
     if options.srt:
         print pycaption.SRTWriter().write(content).encode("utf-8")
     if options.transcript:

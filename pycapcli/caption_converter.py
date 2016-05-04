@@ -49,12 +49,10 @@ def main():
         '[--sami --dfxp --srt --webvtt --transcript]'))
 
     try:
-        captions = codecs.open(filename, encoding='utf-8', mode='r').read()
+        captions = codecs.open(filename, encoding='utf-8-sig', mode='r').read()
     except:
         captions = open(filename, 'r').read()
         captions = unicode(captions, errors='replace')
-
-    captions = captions[3:] if captions[:3] == codecs.BOM_UTF8 else captions
 
     content = read_captions(captions, options)
     write_captions(content, options)

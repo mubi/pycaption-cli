@@ -54,6 +54,8 @@ def main():
         captions = open(filename, 'r').read()
         captions = unicode(captions, errors='replace')
 
+    captions = captions[3:] if captions[:3] == codecs.BOM_UTF8 else captions
+
     content = read_captions(captions, options)
     write_captions(content, options)
 

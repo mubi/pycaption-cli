@@ -1,0 +1,4 @@
+[options]
+install_requires =
+  pycaption==1.2.0
+  https://github.com/mubi/pycaption/tarball/master#egg=pycaption-1.2.0
